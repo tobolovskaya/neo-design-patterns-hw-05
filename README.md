@@ -52,7 +52,7 @@ npx ts-node src/main.ts ./reports csv
 
 3. Результат буде записано у папку reports/ з іменем report_<timestamp>.<format>.
 
-
+![alt text](image.png)
 
 
 
