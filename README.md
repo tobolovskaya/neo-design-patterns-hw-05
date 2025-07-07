@@ -1,3 +1,62 @@
+# File System Report CLI Utility
+
+Цей проєкт реалізує консольну утиліту для аналізу файлової системи та генерації звітів у форматах JSON, CSV та XML за допомогою структурних патернів **Facade** і **Adapter**.
+
+## Структура проєкту
+
+```
+neo-design-patterns-hw-05/
+├─ node_modules/ # Залежності (ігнорується .gitignore)
+├─ reports/ # Генеровані звіти
+├─ src/
+│ ├─ adapters/ # Адаптери форматування (JSON, CSV, XML)
+│ │ ├─ JsonReportAdapter.ts
+│ │ ├─ CsvReportAdapter.ts
+│ │ └─ XmlReportAdapter.ts
+│ ├─ app/
+│ │ └─ ReportManager.ts # Високорівневий фасад (менеджер звітів)
+│ ├─ core/
+│ │ ├─ DirectoryReport.ts # Інтерфейс результату аналізу
+│ │ ├─ DirectoryAnalyzer.ts # Логіка обходу директорії
+│ │ ├─ ReportAdapter.ts # Інтерфейс адаптера формату
+│ │ └─ AnalyzerFacade.ts # Низькорівневий фасад (аналіз + адаптація)
+│ └─ main.ts # Точка входу CLI
+├─ .gitignore # Ігнорує node_modules, вихідні файли тощо
+├─ package.json # NPM залежності та скрипти
+├─ tsconfig.json # Налаштування TypeScript
+└─ README.md # Опис та інструкції
+```
+
+## Використані патерни
+
+- **Facade** — дво-рівнева ієрархія фасадів (`AnalyzerFacade` та `ReportManager`), що спрощує взаємодію із складною системою аналізу та збереження.
+- **Adapter** — окремі класи-адаптери (`JsonReportAdapter`, `CsvReportAdapter`, `XmlReportAdapter`) забезпечують уніфікований контракт для форматування звіту.
+
+## Інструкція запуску
+
+1. Встановіть залежності:
+   ```bash
+   npm install
+   ```
+2. Запустіть утиліту з аргументами: шлях до директорії та формат (за замовчуванням: поточна папка, формат json):
+```bash
+# Аналіз поточної папки, формат JSON
+npx ts-node src/main.ts . json
+
+# Аналіз вказаної папки, формат XML
+npx ts-node src/main.ts path/to/dir xml
+
+# Аналіз іншої папки, формат CSV
+npx ts-node src/main.ts ./reports csv
+```
+
+3. Результат буде записано у папку reports/ з іменем report_<timestamp>.<format>.
+
+
+
+
+
+
 # Домашнє завдання до Теми Структурні патерни: Адаптер та Фасад
 
 ### Опис завдання
